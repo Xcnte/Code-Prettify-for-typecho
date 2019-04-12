@@ -18,7 +18,7 @@ Code Prettify
 
 第 1 步：下载本插件，解压，放到 usr/plugins/ 目录中；
 
-第 2 步：文件夹名改为 Code Prettify；
+第 2 步：文件夹名改为 CodePrettify；
 
 第 3 步：登录管理后台，激活插件 （请勿与其它同类插件同时启用，以免互相影响）
 
