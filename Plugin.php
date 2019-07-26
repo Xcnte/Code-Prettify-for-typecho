@@ -4,7 +4,7 @@
  * 
  * @package CodePrettify
  * @author Xcnte
- * @version 2.1.0
+ * @version 2.1.1
  * @link https://www.xcnte.com
  */
 class CodePrettify_Plugin implements Typecho_Plugin_Interface {
