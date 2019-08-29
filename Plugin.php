@@ -4,7 +4,7 @@
  * 
  * @package CodePrettify
  * @author Xcnte
- * @version 2.1.1
+ * @version 2.1.0
  * @link https://www.xcnte.com
  */
 class CodePrettify_Plugin implements Typecho_Plugin_Interface {
@@ -41,7 +41,7 @@ class CodePrettify_Plugin implements Typecho_Plugin_Interface {
         //设置代码风格样式
         $styles = array_map('basename', glob(dirname(__FILE__) . '/static/styles/*.css'));
         $styles = array_combine($styles, $styles);
-        $name = new Typecho_Widget_Helper_Form_Element_Select('code_style', $styles, 'okaikia.css', _t('选择高亮主题风格'));
+        $name = new Typecho_Widget_Helper_Form_Element_Select('code_style', $styles, 'GrayMac.css', _t('选择高亮主题风格'));
         $form->addInput($name->addRule('enum', _t('必须选择主题'), $styles));
         $showLineNumber = new Typecho_Widget_Helper_Form_Element_Checkbox('showLineNumber', array('showLineNumber' => _t('显示行号')), array('showLineNumber'), _t('是否在代码左侧显示行号'));
         $form->addInput($showLineNumber);
