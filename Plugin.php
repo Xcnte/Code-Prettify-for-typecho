@@ -4,7 +4,7 @@
  * 
  * @package CodePrettify
  * @author Xcnte
- * @version 2.1.4
+ * @version 2.1.5
  * @link https://www.xcnte.com
  */
 class CodePrettify_Plugin implements Typecho_Plugin_Interface {
@@ -72,7 +72,7 @@ class CodePrettify_Plugin implements Typecho_Plugin_Interface {
      */
     public static function header() {
         $style = Helper::options()->plugin('CodePrettify')->code_style;
-        $cssUrl = Helper::options()->pluginUrl . '/CodePrettify/static/styles/' . $style;
+        $cssUrl = Helper::options() -> rootUrl . '/usr/plugins/CodePrettify/static/styles/' . $style;
         echo '<link rel="stylesheet" type="text/css" href="' . $cssUrl . '" />';
     }
 
@@ -81,8 +81,8 @@ class CodePrettify_Plugin implements Typecho_Plugin_Interface {
      *@return void
      */
     public static function footer() {
-        $jsUrl = Helper::options()->pluginUrl . '/CodePrettify/static/prism.js';
-        $jsUrl_clipboard = Helper::options()->pluginUrl . '/CodePrettify/static/clipboard.min.js';
+        $jsUrl = Helper::options() -> rootUrl . '/usr/plugins/CodePrettify/static/prism.js';
+        $jsUrl_clipboard = Helper::options() -> rootUrl . '/usr/plugins/CodePrettify/static/clipboard.min.js';
         $showLineNumber = Helper::options()->plugin('CodePrettify')->showLineNumber;
         if ($showLineNumber) {
             echo <<<HTML
