@@ -1,4 +1,7 @@
-Code Prettify 
+##Code Prettify 
+
+### 若有任何意见或发现任何BUG欢迎访问到我的博客www.xcnte.com留言，Github可能无法及时回复
+
 ### 介绍
 
 基于prismjs的代码语法高亮typecho插件，支持众多常见的代码语言高亮显示，提供11种代码高亮风格自由切换，支持显示代码语言类型、行号，以及支持复制代码到剪切板功能
@@ -66,8 +69,6 @@ Prism.highlightAll(true,null);}
 
 ### 后记
 
-插件的兼容性应该不存在什么问题，博主在Handsome主题上使用一切正常
+博主在Handsome主题上使用一切正常
 
 如果你在其他主题使用过程中出现了问题可以随时联系我
-
-若有任何意见或发现任何BUG欢迎访问到我的博客www.xcnte.com留言
