@@ -3,9 +3,8 @@
  * 基于 prismjs 的代码语法高亮插件<br />可显示语言类型、行号，有复制功能<br />(请勿与其它同类插件同时启用，以免互相影响)<br />详细说明：<a target="_blank" href="https://www.xcnte.com/archives/523/">https://www.xcnte.com/archives/523/</a>
  * 
  * @package CodePrettify
- * @author Xcnte
- * @version 2.1.5
- * @link https://www.xcnte.com
+ * @author <a href="https://www.xcnte.com">Xcnte</a>,<a href="https://iucky.cn">Wibus</a>
+ * @version 2.1.6
  */
 class CodePrettify_Plugin implements Typecho_Plugin_Interface {
      /**
@@ -45,7 +44,7 @@ class CodePrettify_Plugin implements Typecho_Plugin_Interface {
         $form->addInput($name->addRule('enum', _t('必须选择主题'), $styles));
         $showLineNumber = new Typecho_Widget_Helper_Form_Element_Checkbox('showLineNumber', array('showLineNumber' => _t('显示行号')), array('showLineNumber'), _t('是否在代码左侧显示行号'));
         $form->addInput($showLineNumber);
-        $Pjax = new Typecho_Widget_Helper_Form_Element_Checkbox('Pjax', array('Pjax' => _t('是否启动Pjax')), array('Pjax'), _t('是否启动了Pjax，若启动则插件将会自动加入回调函数'));
+        $Pjax = new Typecho_Widget_Helper_Form_Element_Checkbox('Pjax', array('Pjax' => _t('启动Pjax')), array('Pjax'), _t('是否启动了Pjax'));
         $form->addInput($Pjax);
     }
 
