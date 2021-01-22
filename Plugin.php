@@ -45,6 +45,8 @@ class CodePrettify_Plugin implements Typecho_Plugin_Interface {
         $form->addInput($name->addRule('enum', _t('必须选择主题'), $styles));
         $showLineNumber = new Typecho_Widget_Helper_Form_Element_Checkbox('showLineNumber', array('showLineNumber' => _t('显示行号')), array('showLineNumber'), _t('是否在代码左侧显示行号'));
         $form->addInput($showLineNumber);
+        $Pjax = new Typecho_Widget_Helper_Form_Element_Checkbox('Pjax', array('Pjax' => _t('是否启动Pjax')), array('Pjax'), _t('是否启动了Pjax，若启动则插件将会自动加入回调函数'));
+        $form->addInput($Pjax);
     }
 
     /**
@@ -84,6 +86,29 @@ class CodePrettify_Plugin implements Typecho_Plugin_Interface {
         $jsUrl = Helper::options() -> rootUrl . '/usr/plugins/CodePrettify/static/prism.js';
         $jsUrl_clipboard = Helper::options() -> rootUrl . '/usr/plugins/CodePrettify/static/clipboard.min.js';
         $showLineNumber = Helper::options()->plugin('CodePrettify')->showLineNumber;
+        $Pjax = Helper::options()->plugin('CodePrettify')->Pjax;
+        if ($Pjax){
+            if ($showLineNumber){
+            echo <<<HTML
+            <script>$(document).on("ready pjax:end", function () { 
+                if (typeof Prism !== 'undefined') {
+                    var pres = document.getElementsByTagName('pre');
+                for (var i = 0; i < pres.length; i++){
+                    if (pres[i].getElementsByTagName('code').length > 0)
+                        pres[i].className  = 'line-numbers';}
+                Prism.highlightAll(true,null);}
+            });</script>
+HTML;
+            }else{
+                echo <<<HTML
+                <script>$(document).on("ready pjax:end", function () {
+                     if (typeof Prism !== 'undefined') {
+                        Prism.highlightAll(true,null);}
+                });</script>
+HTML;
+            };
+        }
+
         if ($showLineNumber) {
             echo <<<HTML
 <script type="text/javascript">
