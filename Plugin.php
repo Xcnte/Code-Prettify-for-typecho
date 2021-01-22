@@ -3,9 +3,8 @@
  * 基于 prismjs 的代码语法高亮插件<br />可显示语言类型、行号，有复制功能<br />(请勿与其它同类插件同时启用，以免互相影响)<br />详细说明：<a target="_blank" href="https://www.xcnte.com/archives/523/">https://www.xcnte.com/archives/523/</a>
  * 
  * @package CodePrettify
- * @author Xcnte
- * @version 2.1.5
- * @link https://www.xcnte.com
+ * @author <a href="https://www.xcnte.com">Xcnte</a>,<a href="https://iucky.cn">Wibus</a>
+ * @version 2.1.6
  */
 class CodePrettify_Plugin implements Typecho_Plugin_Interface {
      /**
@@ -45,6 +44,8 @@ class CodePrettify_Plugin implements Typecho_Plugin_Interface {
         $form->addInput($name->addRule('enum', _t('必须选择主题'), $styles));
         $showLineNumber = new Typecho_Widget_Helper_Form_Element_Checkbox('showLineNumber', array('showLineNumber' => _t('显示行号')), array('showLineNumber'), _t('是否在代码左侧显示行号'));
         $form->addInput($showLineNumber);
+        $Pjax = new Typecho_Widget_Helper_Form_Element_Checkbox('Pjax', array('Pjax' => _t('启动Pjax')), array('Pjax'), _t('是否启动了Pjax'));
+        $form->addInput($Pjax);
     }
 
     /**
@@ -84,6 +85,29 @@ class CodePrettify_Plugin implements Typecho_Plugin_Interface {
         $jsUrl = Helper::options() -> rootUrl . '/usr/plugins/CodePrettify/static/prism.js';
         $jsUrl_clipboard = Helper::options() -> rootUrl . '/usr/plugins/CodePrettify/static/clipboard.min.js';
         $showLineNumber = Helper::options()->plugin('CodePrettify')->showLineNumber;
+        $Pjax = Helper::options()->plugin('CodePrettify')->Pjax;
+        if ($Pjax){
+            if ($showLineNumber){
+            echo <<<HTML
+            <script>$(document).on("ready pjax:end", function () { 
+                if (typeof Prism !== 'undefined') {
+                    var pres = document.getElementsByTagName('pre');
+                for (var i = 0; i < pres.length; i++){
+                    if (pres[i].getElementsByTagName('code').length > 0)
+                        pres[i].className  = 'line-numbers';}
+                Prism.highlightAll(true,null);}
+            });</script>
+HTML;
+            }else{
+                echo <<<HTML
+                <script>$(document).on("ready pjax:end", function () {
+                     if (typeof Prism !== 'undefined') {
+                        Prism.highlightAll(true,null);}
+                });</script>
+HTML;
+            };
+        }
+
         if ($showLineNumber) {
             echo <<<HTML
 <script type="text/javascript">
